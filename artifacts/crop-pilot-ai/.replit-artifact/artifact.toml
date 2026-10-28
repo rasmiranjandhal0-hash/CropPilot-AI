@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "CropPilot AI"
+description = "A crop advisory platform for farmers and extension workers to manage farms and fields, request AI-generated crop health guidance, and review persistent advisory history."
+version = "1.0.0"
+id = "artifacts/crop-pilot-ai"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21361
+
+[services.development]
+run = "pnpm --filter @workspace/crop-pilot-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/crop-pilot-ai", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/crop-pilot-ai/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21361"
+BASE_PATH = "/"

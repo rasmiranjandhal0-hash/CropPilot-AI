@@ -1,0 +1,57 @@
+````text
+# MASTER PROMPT: AI-Powered Agriculture Crop Advisory Assistant (CropPilot AI)
+
+Copy and paste this entire block directly into the Replit Agent input panel.
+
+---
+
+## 1. Header & System Persona Role
+- **Application Name:** CropPilot AI
+- **Primary Persona:** Expert Agricultural Agronomist and Crop Health Advisor powered by advanced AI.
+- **Role Summary:** A clean, production-grade agricultural assistant interface enabling farmers and extension workers to diagnose crop diseases, analyze soil conditions, manage farm profiles, and store actionable AI advisories.
+
+## 2. Core Mission Directive
+Deliver a secure, fully integrated, end-to-end web application that allows users to create accounts, log farms/fields, input crop symptoms with growth/soil metrics, and receive structured, persistent AI advisories using the official `@google/genai` SDK and Replit PostgreSQL.
+
+## 3. Product Goal
+Provide an all-in-one agricultural management platform featuring user authentication, multi-farm/field tracking, instant AI agronomic diagnostic generation, historical advisory lookup, and responsive data visualization.
+
+## 4. Mandatory Features
+1. **User Authentication & Session Security:** Complete user registration, login, JWT token issuance, and password hashing (`bcryptjs`).
+2. **Farm & Field Management:** Full CRUD operations to log farms, locations, field plots, crop types, and soil profiles.
+3. **AI Crop Advisory Engine:** Multimodal/text advisory form submitting crop parameters to `@google/genai` (`gemini-2.5-flash`) for real-time agronomic analysis.
+4. **Structured JSON Output & Rendering:** AI responses returned in strict JSON format parsed and displayed as dynamic UI components (Severity badging, Action Steps, Safety Warnings).
+5. **Persistent PostgreSQL Storage:** Full relational storage of user accounts, farm structures, field plots, and complete advisory histories.
+6. **Advisory History & Search:** Searchable and filterable archive of past crop diagnoses with full details view.
+
+## 5. Technology Requirements
+- **Frontend:** React.js (Vite framework), Tailwind CSS, Lucide React icons, React Router DOM.
+- **Backend:** Node.js, Express.js, JWT (`jsonwebtoken`), `bcryptjs`.
+- **Database:** Replit PostgreSQL via `pg` (node-postgres Connection Pool).
+- **AI SDK:** `@google/genai` (latest official Google GenAI SDK using `gemini-2.5-flash`).
+- **Validation:** Zod for environment and request payload validation.
+
+## 6. Application Pages (Routes)
+- `GET /auth` - Authentication Page (Login & Signup tabs).
+- `GET /` - Main Dashboard & Instant AI Advisory Form.
+- `GET /farms` - Farm & Field Management Hub.
+- `GET /history` - Historical Crop Advisory Records & Details view.
+
+## 7. User Flow
+1. **Authentication:** User signs up or logs into CropPilot AI; a JWT token is saved in LocalStorage or HttpOnly cookies.
+2. **Farm Setup:** User navigates to `/farms` to add a farm location and define field plots with default crop and soil types.
+3. **Advisory Request:** On `/`, user selects an existing field or custom crop, enters growth stage, and describes symptoms.
+4. **AI Processing:** Backend validates input via Zod, attaches system agronomy context, sends payload to `@google/genai`, and receives strict structured JSON.
+5. **Storage & Display:** The server persists the advisory report to PostgreSQL linked to `user_id` and `field_id`, then returns JSON to the client.
+6. **Review:** Frontend updates dynamically showing diagnosis, action steps, and preventative measures, while archiving the report under `/history`.
+
+## 8. Target Domains & Categorization
+- Crop Disease & Pest Identification
+- Soil & Nutrient Management
+- Growth Stage Advisory & Irrigation Setup
+- Safety Disclaimers & PPE Guidelines
+
+## 9. Form & Advisory Configuration
+- **Supported Crops:** Wheat, Rice, Corn, Tomato, Potato, Cotton, Soybean, Apple, Citrus, Sugarcane, Other.
+- **Growth Stages:** Seedling, Vegetative, Flowering, Fruiting, Harvesting.
+- **Symptom Input:** Free-text textarea
